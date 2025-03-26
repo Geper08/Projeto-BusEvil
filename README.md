@@ -16,6 +16,7 @@ Este projeto tem como objetivo criar um **programa simples de cadastros**. Ele f
 - **Cadastro de usuários**: Permite cadastrar informações como nome, email, etc.
 - **Visualização**: Exibe todos os cadastros feitos.
 - **Edição e Deleção**: Permite modificar ou remover cadastros.
+- **CRUD.
 - **Tema personalizável**: Interface inspirada em elementos do Resident Evil.
 
 ## Imagens do Projeto
@@ -26,10 +27,21 @@ Este projeto tem como objetivo criar um **programa simples de cadastros**. Ele f
 
 ### Cadastro de Novo Usuário
 
-![Cadastro de Usuário](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20inicial.PNG)
+![Cadastro de Usuário](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20cadastro%20usuario.PNG)
 
-## Como Rodar
+### Cadastro de Novo Motorista
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/projeto-cadastro.git
+![Cadastro de Motorista](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20cadastro%20motorista.PNG)
+
+### Cadastro de Novo Ônibus
+![Cadastro de Ônibus](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20cadastro%20onibus.PNG)
+
+### Cadastro de Novo Cartão
+![Cadastro de Cartão](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20cadastro%20cartao.PNG)
+
+### Tela Encerramento do programa
+![Encerramento](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20encerramento.PNG)
+
+
+
+
