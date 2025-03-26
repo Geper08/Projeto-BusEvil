@@ -22,11 +22,11 @@ Este projeto tem como objetivo criar um **programa simples de cadastros**. Ele f
 
 ### Tela Inicial
 
-![Tela Inicial](./assets/tela_inicial.png)
+![Tela Inicial](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20inicial.PNG)
 
 ### Cadastro de Novo Usuário
 
-![Cadastro de Usuário](./assets/cadastro_usuario.png)
+![Cadastro de Usuário](https://github.com/Geper08/Projeto-BusEvil/blob/main/Projeto%20-%20BUS_EVIL/imagens/projeto%20-%20BUS_EVIL%20-%20tela%20inicial.PNG)
 
 ## Como Rodar
 
