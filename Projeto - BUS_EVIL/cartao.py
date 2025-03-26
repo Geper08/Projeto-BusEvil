@@ -3,7 +3,7 @@ from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
 from tkinter import messagebox
-
+from datetime import *
 
 
 
@@ -43,12 +43,13 @@ class Cartoes(Toplevel):
         self.entry_data_emissao.delete(0, END)
         
     def db_conect(self):
-        self.conexao = sqlite3.connect('BDCadUni.db')
+        self.conexao = sqlite3.connect('meu_banco.db')
         self.cursor = self.conexao.cursor()
-        print("conectando ao banco de dados")
-        
+        print('Conectado ao banco SQLite3')
+
     def db_desconect(self):
-        self.conexao.close();print("Desconectando ao banco de dados")
+        self.conexao.close() 
+        print("Desconectando ao banco de dados sqlite3")
         
    
     def capturar_campos(self):
@@ -78,7 +79,7 @@ class Cartoes(Toplevel):
             messagebox.showinfo("Cadastro CARTÃO >> Aviso!!!", msg)
         else:
             self.db_conect()
-            self.cursor.execute("""INSERT INTO geovani_martins_pereira.cartoes (id_cartao, qtde_credito, tipo_cartao, data_emissao) 
+            self.cursor.execute("""INSERT INTO cartoes (id_cartao, qtde_credito, tipo_cartao, data_emissao) 
             VALUES(?,?,?,?)""",(self.id_cartao, self.qtde_credito, self.tipo_cartao, self.data_emissao))
             self.conexao.commit()
             self.db_desconect()
@@ -89,7 +90,7 @@ class Cartoes(Toplevel):
         self.lista_grid.delete(*self.lista_grid.get_children())
         self.db_conect()
         lista = self.cursor.execute("""SELECT id_cartao, id_proprietario, qtde_credito, tipo_cartao, data_emissao
-        FROM geovani_martins_pereira.cartoes ORDER BY id_proprietario ASC;""")
+        FROM cartoes ORDER BY id_proprietario ASC;""")
         for l in lista:
             self.lista_grid.insert("",END,values=l)
         self.db_desconect()
@@ -101,7 +102,7 @@ class Cartoes(Toplevel):
         self.entry_id_proprietario.insert(END, '%')
         id_proprietario = self.entry_id_proprietario.get()
         self.cursor.execute(
-            """ SELECT id_cartao, id_proprietario, qtde_credito, tipo_cartao, data_emissao  FROM geovani_martins_pereira.cartoes
+            """ SELECT id_cartao, id_proprietario, qtde_credito, tipo_cartao, data_emissao  FROM cartoes
             WHERE id_proprietario LIKE '%s' ORDER BY id_proprietario ASC""" % id_proprietario)
         buscanome = self.cursor.fetchall()
         for i in buscanome:
@@ -125,7 +126,7 @@ class Cartoes(Toplevel):
     def deleta_cartao(self):
         self.capturar_campos()
         self.db_conect()
-        self.cursor.execute("""DELETE FROM geovani_martins_pereira.cartoes WHERE id_cartao = ?""",(self.id_cartao))
+        self.cursor.execute("""DELETE FROM cartoes WHERE id_cartao = ?""",(self.id_cartao))
         self.conexao.commit()
         self.db_desconect()
         self.limpar_campos()
@@ -134,7 +135,7 @@ class Cartoes(Toplevel):
     def alterar_cartao(self):
         self.capturar_campos()
         self.db_conect()
-        self.cursor.execute("""UPDATE geovani_martins_pereira.cartoes SET id_proprietario = ?, qtde_credito = ?, tipo_cartao = ?, data_emissao = ?
+        self.cursor.execute("""UPDATE cartoes SET id_proprietario = ?, qtde_credito = ?, tipo_cartao = ?, data_emissao = ?
         WHERE id_cartao = ?;
         """,(self.id_cartao, self.id_proprietario, self.qtde_credito,self.tipo_cartao,self.data_emissao,self.id_sistema))
         self.conexao.commit()
