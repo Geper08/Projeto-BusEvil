@@ -4,7 +4,7 @@ from tkinter import Canvas
 from tkinter import messagebox
 import pyodbc
 from motorista import *
-
+from datetime import *
 
 
 class Onibus(Toplevel):
@@ -43,20 +43,13 @@ class Onibus(Toplevel):
         
         
     def db_conect(self):
-        driver = '{ODBC Driver 17 for SQL Server}'
-        server = 'sql-estudo.database.windows.net'
-        database = 'db-estudos'
-        username = 'geovani.pereira@blueshift.com.br'
-        Authentication = 'ActiveDirectoryInteractive'
-        port = '1433'
-        self.conexao = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';AUTHENTICATION=' +
-                                Authentication+';PORT='+port+';DATABASE='+database+';UID='+username)
-        
+        self.conexao = sqlite3.connect('meu_banco.db')
         self.cursor = self.conexao.cursor()
-        print("conectando ao banco de dados")
-        
+        print('Conectado ao banco SQLite3')
+
     def db_desconect(self):
-        self.conexao.close();print("Desconectando ao banco de dados sqlite3")
+        self.conexao.close() 
+        print("Desconectando ao banco de dados sqlite3")
         
     
         
@@ -88,7 +81,7 @@ class Onibus(Toplevel):
             messagebox.showinfo("Cadastro ÔNIBUS >> Aviso!!!", msg)
         else:
             self.db_conect()
-            self.cursor.execute("""INSERT INTO geovani_martins_pereira.onibus (num_placa, num_linha, mod_bus, ano_fab) 
+            self.cursor.execute("""INSERT INTO onibus (num_placa, num_linha, mod_bus, ano_fab) 
             VALUES(?,?,?,?)""",(self.num_placa,self.num_linha,self.mod_bus,self.ano_fab))
             self.conexao.commit()
             self.db_desconect()
@@ -99,7 +92,7 @@ class Onibus(Toplevel):
         self.lista_grid.delete(*self.lista_grid.get_children())
         self.db_conect()
         lista = self.cursor.execute("""SELECT  id_motorista, num_placa, num_linha, mod_bus, ano_fab
-        FROM geovani_martins_pereira.onibus ORDER BY id_motorista ASC;""")
+        FROM onibus ORDER BY id_motorista ASC;""")
         for l in lista:
             self.lista_grid.insert("",END,values=l)
         self.db_desconect()
@@ -111,7 +104,7 @@ class Onibus(Toplevel):
         self.entry_num_placa.insert(END, '%')
         num_placa = self.entry_num_placa.get()
         self.cursor.execute(
-            """ SELECT id_motorista, num_placa, num_linha, mod_bus, ano_fab  FROM geovani_martins_pereira.onibus
+            """ SELECT id_motorista, num_placa, num_linha, mod_bus, ano_fab  FROM onibus
             WHERE num_placa LIKE '%s' ORDER BY id_motorista ASC""" % num_placa)
         buscanome = self.cursor.fetchall()
         for i in buscanome:
@@ -137,7 +130,7 @@ class Onibus(Toplevel):
     def deleta_bus(self):
         self.capturar_campos()
         self.db_conect()
-        self.cursor.execute("""DELETE FROM geovani_martins_pereira.onibus WHERE id_motorista = ?""",(self.id_motorista))
+        self.cursor.execute("""DELETE FROM onibus WHERE id_motorista = ?""",(self.id_motorista))
         self.conexao.commit()
         self.db_desconect()
         self.limpar_campos()
@@ -146,7 +139,7 @@ class Onibus(Toplevel):
     def alterar_bus(self):
         self.capturar_campos()
         self.db_conect()
-        self.cursor.execute("""UPDATE geovani_martins_pereira.onibus SET num_placa=?, num_linha=?, mod_bus=?, ano_fab = ?
+        self.cursor.execute("""UPDATE onibus SET num_placa=?, num_linha=?, mod_bus=?, ano_fab = ?
         WHERE id_motorista = ?;
         """,(self.num_placa, self.num_linha,self.mod_bus,self.ano_fab,self.id_motorista))
         self.conexao.commit()
